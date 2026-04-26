@@ -4,6 +4,18 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 
+interface DropdownItem {
+  label: string;
+  href: string;
+}
+
+interface NavItem {
+  name: string;
+  href?: string;
+  hasDropdown: boolean;
+  dropdownItems?: DropdownItem[];
+}
+
 export default function Header() {
   const [openMenu, setOpenMenu] = useState<string | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -20,44 +32,44 @@ export default function Header() {
   const handleEnter = (menu: string) => setOpenMenu(menu);
   const handleLeave = () => setOpenMenu(null);
 
-  const navItems = [
+  const navItems: NavItem[] = [
     { name: "Home", href: "/", hasDropdown: false },
     {
       name: "About",
       hasDropdown: true,
       dropdownItems: [
-        "About Institute",
-        "Principal's Desk",
-        "Vision & Mission",
-        "Permission Letter",
-      ],
+        { label: "About Institute", href: "/" },
+        { label: "Principal's Desk", href: "/principal" },
+        { label: "Vision & Mission", href: "/" },
+        { label: "Permission Letter", href: "/" }
+      ]
     },
     { name: "Mandatory Info", href: "/mandatory-info", hasDropdown: false },
     {
       name: "College",
       hasDropdown: true,
       dropdownItems: [
-        "Affiliation",
-        "Departments",
-        "Central Library",
-        "Infrastructure",
-        "Extracurricular Activities",
+        { label: "Affiliation", href: "/affiliation" },
+        { label: "Departments", href: "/departments" },
+        { label: "Central Library", href: "/central-library" },
+        { label: "Infrastructure", href: "/infrastructure" },
+        { label: "Extracurricular Activities", href: "/extracurricular" },
       ],
     },
     {
       name: "Hospital",
       hasDropdown: true,
       dropdownItems: [
-        "OPD",
-        "IPD",
-        "Laboratory",
-        "Radiology",
-        "Physiotherapy & Rehabilitation",
-        "Dispensary",
+        { label: "OPD", href: "/opd" },
+        { label: "IPD", href: "/ipd" },
+        { label: "Laboratory", href: "/laboratory" },
+        { label: "Radiology", href: "/radiology" },
+        { label: "Physiotherapy & Rehabilitation", href: "/physiotherapy" },
+        { label: "Dispensary", href: "/dispensary" },
       ],
     },
     { name: "Student's Zone", href: "/students-zone", hasDropdown: false },
-    { name: "gallery", href: "/gallery", hasDropdown: false },
+    { name: "Gallery", href: "/gallery", hasDropdown: false },
     { name: "Contact", href: "/contact", hasDropdown: false },
   ];
 
@@ -147,12 +159,12 @@ export default function Header() {
                   {openMenu === item.name.toLowerCase() && (
                     <div className="absolute top-8 left-0 bg-white shadow-xl rounded-lg min-w-[220px] z-50 border border-gray-100 overflow-hidden">
                       <ul className="py-2">
-                        {item.dropdownItems?.map((subItem) => (
+                        {item.dropdownItems?.map((subItem, index) => (
                           <li
-                            key={subItem}
+                            key={`${subItem.label}-${index}`}
                             className="px-4 py-2 hover:bg-green-50 hover:text-green-700 cursor-pointer text-sm transition"
                           >
-                            {subItem}
+                            <a href={subItem.href}>{subItem.label}</a>
                           </li>
                         ))}
                       </ul>
@@ -201,14 +213,14 @@ export default function Header() {
                   </button>
                   {openMenu === item.name.toLowerCase() && (
                     <div className="pl-4 space-y-2 border-l-2 border-green-200">
-                      {item.dropdownItems?.map((subItem) => (
+                      {item.dropdownItems?.map((subItem, index) => (
                         <Link
-                          key={subItem}
-                          href="#"
+                          key={`mobile-${subItem.label}-${index}`}
+                          href={subItem.href}
                           className="block py-1 text-sm text-gray-600 hover:text-green-700"
                           onClick={() => setMobileMenuOpen(false)}
                         >
-                          {subItem}
+                          {subItem.label}
                         </Link>
                       ))}
                     </div>
