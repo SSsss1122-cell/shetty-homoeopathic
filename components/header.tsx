@@ -57,7 +57,7 @@ export default function Header() {
       ],
     },
     { name: "Student's Zone", href: "/students-zone", hasDropdown: false },
-    { name: "Gallery", href: "/gallery", hasDropdown: false },
+    { name: "gallery", href: "/gallery", hasDropdown: false },
     { name: "Contact", href: "/contact", hasDropdown: false },
   ];
 
