@@ -34,14 +34,16 @@ export default function Header() {
 
   const navItems: NavItem[] = [
     { name: "Home", href: "/", hasDropdown: false },
-    {
-      name: "About",
-      hasDropdown: true,
+    { 
+      name: "About", 
+      href: "/about",  // Added href for About
+      hasDropdown: true,  // Keep dropdown for sub-items
       dropdownItems: [
-        { label: "About Institute", href: "/" },
+        { label: "About Institute", href: "/about" },
+        { label: "Chairman's Profile", href: "/about#chairman" },
         { label: "Principal's Desk", href: "/principal" },
-        { label: "Vision & Mission", href: "/" },
-        { label: "Permission Letter", href: "/" }
+        { label: "Vision & Mission", href: "/about#vision-mission" },
+        { label: "Permission Letter", href: "/permission-letter" }
       ]
     },
     { name: "Mandatory Info", href: "/mandatory-info", hasDropdown: false },
@@ -75,56 +77,78 @@ export default function Header() {
 
   return (
     <header className="w-full relative z-50">
-      {/* Top Bar - Combined Trust and College Info */}
-      <div className="bg-gradient-to-r from-green-900 to-green-800 text-white px-4 md:px-8 py-3">
-        <div className="flex flex-col md:flex-row justify-between items-center gap-3">
+      {/* Top Bar - Homoeopathy College Trust Header */}
+      <div className="bg-white shadow-md px-4 md:px-8 py-4">
+        <div className="flex flex-col lg:flex-row justify-between items-center gap-4">
+          {/* Left: Trust and College Name with Logos */}
           <div className="flex items-center gap-3 md:gap-6 flex-wrap justify-center">
-            {/* SGI Logo */}
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-3">
               <Image
                 src="/SGi-Logo-4K_JPEG.jpg"
                 alt="SGI Logo"
-                width={50}
-                height={50}
+                width={55}
+                height={55}
                 className="object-contain rounded-md"
                 priority
               />
-              <div className="leading-tight">
-                <h1 className="font-bold text-sm md:text-base">SHETTY SANGAPPA</h1>
-                <p className="text-xs opacity-90">MEMORIAL TRUST</p>
+              <div className="leading-tight border-l-2 border-green-200 pl-3">
+                <h1 className="font-bold text-sm md:text-base text-gray-800 tracking-wide">
+                  SHETTY SANGAPPA
+                </h1>
+                <p className="text-xs text-gray-500">MEMORIAL TRUST</p>
               </div>
             </div>
 
-            <div className="w-px h-8 bg-green-600 hidden md:block" />
+            <div className="hidden md:block w-px h-10 bg-gray-200" />
 
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-3">
               <Image
                 src="/medical-logo.png"
-                alt="Medical Logo"
-                width={45}
-                height={45}
+                alt="Homoeopathy College Logo"
+                width={50}
+                height={50}
                 className="object-contain"
               />
               <div className="leading-tight">
-                <h1 className="font-bold text-sm md:text-base">SHETTY HOMEO.</h1>
-                <p className="text-xs opacity-90">MEDICAL COLLEGE & HOSPITAL</p>
+                <h1 className="font-bold text-base md:text-lg text-green-800 tracking-wide">
+                  SHETTY HOMOEOPATHY
+                </h1>
+                <p className="text-xs text-gray-500">MEDICAL COLLEGE & HOSPITAL</p>
               </div>
             </div>
           </div>
 
-          <div className="flex gap-4 md:gap-6 text-xs md:text-sm">
-            <a href="tel:+919663363444" className="flex items-center gap-2 hover:text-yellow-300 transition">
-              <span>📞</span> +91 9663363444
-            </a>
-            <a href="mailto:info@shettyhomoeopathy.edu.in" className="flex items-center gap-2 hover:text-yellow-300 transition">
-              <span>✉️</span> info@shettyhomoeopathy.edu.in
-            </a>
+          {/* Right: Contact Info and Approval Badge in a Card Layout */}
+          <div className="flex flex-col items-end gap-2">
+            {/* Contact Row - Phone and Email side by side */}
+            <div className="flex items-center gap-3">
+              <a
+                href="tel:+919663363444"
+                className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-green-50 hover:bg-green-100 transition border border-green-100"
+              >
+                <span className="text-green-700 text-sm">📞</span>
+                <div>
+                  <p className="text-[9px] text-green-600 uppercase tracking-wider font-semibold">Call</p>
+                  <p className="text-sm font-bold text-gray-800">+91 9663363444</p>
+                </div>
+              </a>
+              <a
+                href="mailto:info@shettyhomoeopathy.edu.in"
+                className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-green-50 hover:bg-green-100 transition border border-green-100"
+              >
+                <span className="text-green-700 text-sm">✉️</span>
+                <div>
+                  <p className="text-[9px] text-green-600 uppercase tracking-wider font-semibold">Email</p>
+                  <p className="text-sm font-bold text-gray-800">info@shettyhomoeopathy.edu.in</p>
+                </div>
+              </a>
+            </div>
+            {/* Approval Badge as a professional pill below contacts */}
+            <div className="inline-flex items-center gap-1.5 bg-gradient-to-r from-green-50 to-emerald-50 text-green-700 text-xs font-medium px-3 py-1 rounded-full border border-green-200 shadow-sm">
+              <span className="text-green-600 text-sm">✅</span>
+              <span>Approved by NCH | MINISTRY OF AYUSH, GOVT. OF INDIA</span>
+            </div>
           </div>
-        </div>
-        
-        {/* Approval Badge inside top bar */}
-        <div className="text-center mt-2 pt-2 border-t border-green-700 text-yellow-200 text-xs md:text-sm font-semibold">
-          ✅ Approved by NCH | MINISTRY OF AYUSH, GOVT. OF INDIA
         </div>
       </div>
 
@@ -133,12 +157,12 @@ export default function Header() {
         className={`sticky top-0 z-40 transition-all duration-300 ${
           scrolled
             ? "bg-white shadow-lg py-2"
-            : "bg-gray-50 shadow-md py-3"
+            : "bg-white/95 backdrop-blur-sm shadow-md py-3"
         } px-4 md:px-8`}
       >
         <div className="flex justify-between items-center">
           <div className="flex-1 md:flex-none">
-            <p className="text-green-800 font-semibold text-xs md:text-sm">
+            <p className="text-green-700 font-semibold text-xs md:text-sm">
               Affiliated to RGUHS, Bengaluru | Shetty Group of Institutions
             </p>
           </div>
@@ -153,9 +177,12 @@ export default function Header() {
                   onMouseLeave={handleLeave}
                   className="relative group"
                 >
-                  <button className="flex items-center gap-1 hover:text-green-700 transition py-2">
-                    {item.name} <span>▼</span>
-                  </button>
+                  <Link
+                    href={item.href || "#"}
+                    className="flex items-center gap-1 hover:text-green-700 transition py-2"
+                  >
+                    {item.name} <span className="text-xs">▼</span>
+                  </Link>
                   {openMenu === item.name.toLowerCase() && (
                     <div className="absolute top-8 left-0 bg-white shadow-xl rounded-lg min-w-[220px] z-50 border border-gray-100 overflow-hidden">
                       <ul className="py-2">
@@ -164,7 +191,9 @@ export default function Header() {
                             key={`${subItem.label}-${index}`}
                             className="px-4 py-2 hover:bg-green-50 hover:text-green-700 cursor-pointer text-sm transition"
                           >
-                            <a href={subItem.href}>{subItem.label}</a>
+                            <Link href={subItem.href}>
+                              {subItem.label}
+                            </Link>
                           </li>
                         ))}
                       </ul>
@@ -186,7 +215,7 @@ export default function Header() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2 rounded-lg bg-green-700 text-white text-xl"
+            className="lg:hidden p-2 rounded-lg bg-green-700 text-white text-xl hover:bg-green-800 transition"
             aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
           >
             {mobileMenuOpen ? "✕" : "☰"}
@@ -199,18 +228,13 @@ export default function Header() {
             {navItems.map((item) =>
               item.hasDropdown ? (
                 <div key={item.name} className="space-y-2">
-                  <button
-                    onClick={() =>
-                      setOpenMenu(
-                        openMenu === item.name.toLowerCase()
-                          ? null
-                          : item.name.toLowerCase()
-                      )
-                    }
-                    className="flex items-center justify-between w-full py-2 text-gray-700 font-medium"
+                  <Link
+                    href={item.href || "#"}
+                    className="flex items-center justify-between w-full py-2 text-gray-700 font-medium hover:text-green-700"
+                    onClick={() => setMobileMenuOpen(false)}
                   >
-                    {item.name} <span>▼</span>
-                  </button>
+                    {item.name} <span className="text-xs">▼</span>
+                  </Link>
                   {openMenu === item.name.toLowerCase() && (
                     <div className="pl-4 space-y-2 border-l-2 border-green-200">
                       {item.dropdownItems?.map((subItem, index) => (

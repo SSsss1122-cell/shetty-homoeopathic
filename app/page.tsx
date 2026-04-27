@@ -79,7 +79,7 @@ export default function Home() {
               </p>
             </div>
             <h1 className="text-4xl md:text-6xl font-bold mb-4 text-white drop-shadow-lg">
-              SHETTY HOMOEOMEDICAL
+              SHETTY HOMOEOPATHY
               <span className="block text-emerald-300">COLLEGE & HOSPITAL</span>
             </h1>
             <div className="flex flex-wrap justify-center gap-6 text-sm mb-4 text-gray-200">
@@ -238,7 +238,7 @@ export default function Home() {
               <div className="bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3">
                 <div className="h-64 relative overflow-hidden">
                   <Image 
-                    src="/shetty homoeopathic hospitall.jpeg" 
+                    src="/shetty homoeopathic hoapitall.jpeg" 
                     alt="Green Campus" 
                     fill
                     className="object-cover group-hover:scale-110 transition-transform duration-700"
