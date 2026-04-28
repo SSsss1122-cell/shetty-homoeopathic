@@ -34,23 +34,14 @@ export default function Header() {
 
   const navItems: NavItem[] = [
     { name: "Home", href: "/", hasDropdown: false },
-    { 
-      name: "About", 
-      href: "/about",  // Added href for About
-      hasDropdown: true,  // Keep dropdown for sub-items
+    {
+      name: "About",
+      hasDropdown: true,
       dropdownItems: [
-<<<<<<< HEAD
-        { label: "About Institute", href: "/about" },
-        { label: "Chairman's Profile", href: "/about#chairman" },
-        { label: "Principal's Desk", href: "/principal" },
-        { label: "Vision & Mission", href: "/about#vision-mission" },
-        { label: "Permission Letter", href: "/permission-letter" }
-=======
         { label: "About Institute", href: "/" },
         { label: "Principal's Desk", href: "/principal" },
         { label: "Vision & Mission", href: "/" },
         { label: "Permission Letter", href: "/" }
->>>>>>> f865c6b (opd section added)
       ]
     },
     { name: "Mandatory Info", href: "/mandatory-info", hasDropdown: false },
@@ -84,11 +75,7 @@ export default function Header() {
 
   return (
     <header className="w-full relative z-50">
-<<<<<<< HEAD
-      {/* Top Bar - Homoeopathy College Trust Header */}
-=======
       {/* Top Bar - Homoeopathy College Header */}
->>>>>>> f865c6b (opd section added)
       <div className="bg-white shadow-md px-4 md:px-8 py-4">
         <div className="flex flex-col lg:flex-row justify-between items-center gap-4">
           {/* Left: Trust and College Name with Logos */}
@@ -129,19 +116,6 @@ export default function Header() {
             </div>
           </div>
 
-<<<<<<< HEAD
-          {/* Right: Contact Info and Approval Badge in a Card Layout */}
-          <div className="flex flex-col items-end gap-2">
-            {/* Contact Row - Phone and Email side by side */}
-            <div className="flex items-center gap-3">
-              <a
-                href="tel:+919663363444"
-                className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-green-50 hover:bg-green-100 transition border border-green-100"
-              >
-                <span className="text-green-700 text-sm">📞</span>
-                <div>
-                  <p className="text-[9px] text-green-600 uppercase tracking-wider font-semibold">Call</p>
-=======
           {/* Right: Equal width cards for Approval Badge and Contact Info */}
           <div className="flex flex-col items-end gap-3 min-w-[280px]">
             {/* Approval Badge - Full width card */}
@@ -161,37 +135,20 @@ export default function Header() {
                 <span className="text-green-700 text-sm">📞</span>
                 <div className="text-left">
                   <p className="text-[9px] text-gray-500 uppercase tracking-wider font-semibold">Call</p>
->>>>>>> f865c6b (opd section added)
                   <p className="text-sm font-bold text-gray-800">+91 9663363444</p>
                 </div>
               </a>
               <a
                 href="mailto:info@shettyhomoeopathy.edu.in"
-<<<<<<< HEAD
-                className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-green-50 hover:bg-green-100 transition border border-green-100"
-              >
-                <span className="text-green-700 text-sm">✉️</span>
-                <div>
-                  <p className="text-[9px] text-green-600 uppercase tracking-wider font-semibold">Email</p>
-=======
                 className="flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-gray-50 hover:bg-green-50 transition border border-gray-200 min-w-[200px]"
               >
                 <span className="text-green-700 text-sm">✉️</span>
                 <div className="text-left">
                   <p className="text-[9px] text-gray-500 uppercase tracking-wider font-semibold">Email</p>
->>>>>>> f865c6b (opd section added)
                   <p className="text-sm font-bold text-gray-800">info@shettyhomoeopathy.edu.in</p>
                 </div>
               </a>
             </div>
-<<<<<<< HEAD
-            {/* Approval Badge as a professional pill below contacts */}
-            <div className="inline-flex items-center gap-1.5 bg-gradient-to-r from-green-50 to-emerald-50 text-green-700 text-xs font-medium px-3 py-1 rounded-full border border-green-200 shadow-sm">
-              <span className="text-green-600 text-sm">✅</span>
-              <span>Approved by NCH | MINISTRY OF AYUSH, GOVT. OF INDIA</span>
-            </div>
-=======
->>>>>>> f865c6b (opd section added)
           </div>
         </div>
       </div>
@@ -221,18 +178,9 @@ export default function Header() {
                   onMouseLeave={handleLeave}
                   className="relative group"
                 >
-<<<<<<< HEAD
-                  <Link
-                    href={item.href || "#"}
-                    className="flex items-center gap-1 hover:text-green-700 transition py-2"
-                  >
-                    {item.name} <span className="text-xs">▼</span>
-                  </Link>
-=======
                   <button className="flex items-center gap-1 hover:text-green-700 transition py-2">
                     {item.name} <span className="text-xs">▼</span>
                   </button>
->>>>>>> f865c6b (opd section added)
                   {openMenu === item.name.toLowerCase() && (
                     <div className="absolute top-8 left-0 bg-white shadow-xl rounded-lg min-w-[220px] z-50 border border-gray-100 overflow-hidden">
                       <ul className="py-2">
@@ -241,13 +189,7 @@ export default function Header() {
                             key={`${subItem.label}-${index}`}
                             className="px-4 py-2 hover:bg-green-50 hover:text-green-700 cursor-pointer text-sm transition"
                           >
-<<<<<<< HEAD
-                            <Link href={subItem.href}>
-                              {subItem.label}
-                            </Link>
-=======
                             <a href={subItem.href}>{subItem.label}</a>
->>>>>>> f865c6b (opd section added)
                           </li>
                         ))}
                       </ul>
@@ -282,17 +224,18 @@ export default function Header() {
             {navItems.map((item) =>
               item.hasDropdown ? (
                 <div key={item.name} className="space-y-2">
-                  <Link
-                    href={item.href || "#"}
-                    className="flex items-center justify-between w-full py-2 text-gray-700 font-medium hover:text-green-700"
-                    onClick={() => setMobileMenuOpen(false)}
+                  <button
+                    onClick={() =>
+                      setOpenMenu(
+                        openMenu === item.name.toLowerCase()
+                          ? null
+                          : item.name.toLowerCase()
+                      )
+                    }
+                    className="flex items-center justify-between w-full py-2 text-gray-700 font-medium"
                   >
                     {item.name} <span className="text-xs">▼</span>
-<<<<<<< HEAD
-                  </Link>
-=======
                   </button>
->>>>>>> f865c6b (opd section added)
                   {openMenu === item.name.toLowerCase() && (
                     <div className="pl-4 space-y-2 border-l-2 border-green-200">
                       {item.dropdownItems?.map((subItem, index) => (
