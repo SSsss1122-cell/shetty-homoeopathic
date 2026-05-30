@@ -26,7 +26,7 @@ const DEFAULT_IMAGES = [
     alt: 'Healing Campus'
   },
   {
-    src: '/homo/img4.jpg',
+    src: '/homo/img4.JPG',
     alt: 'Medical Facilities'
   },
   {
