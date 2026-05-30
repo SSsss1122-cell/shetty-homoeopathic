@@ -13,7 +13,7 @@ const DEFAULT_IMAGES = [
   { src: '/img7.jpeg', alt: 'Campus View 7' },
   { src: '/img8.jpeg', alt: 'Campus View 8' },
   // homo folder - exact case as in your public/homo/ folder
-  { src: '/homo/img1.JPG', alt: 'Homoeopathy Department 1' },
+  { src: '/homo/iimg1.JPG', alt: 'Homoeopathy Department 1' },
   { src: '/homo/img2.JPG', alt: 'Homoeopathy Department 2' },
   { src: '/homo/img3.JPG', alt: 'Homoeopathy Department 3' },
   { src: '/homo/img4.JPG', alt: 'Homoeopathy Department 4' },
