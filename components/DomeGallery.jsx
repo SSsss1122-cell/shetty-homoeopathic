@@ -12,17 +12,15 @@ const DEFAULT_IMAGES = [
   { src: '/img6.jpeg', alt: 'Campus View 6' },
   { src: '/img7.jpeg', alt: 'Campus View 7' },
   { src: '/img8.jpeg', alt: 'Campus View 8' },
-  // homo folder - exact case as in your public/homo/ folder
-  { src: '/homo/iimg1.JPG', alt: 'Homoeopathy Department 1' },
-
-  { src: '/homo/img3.JPG', alt: 'Homoeopathy Department 3' },
+  // homo folder images - REMOVED img2.JPG since it doesn't exist
+  { src: '/homo/img1.JPG', alt: 'Homoeopathy Department 1' },
+  { src: '/homo/img3.JPG', alt: 'Homoeopathy Department 3' },  // img2 removed
   { src: '/homo/img4.JPG', alt: 'Homoeopathy Department 4' },
   { src: '/homo/img5.jpeg', alt: 'Homoeopathy Department 5' },
   { src: '/homo/img6.jpeg', alt: 'Homoeopathy Department 6' },
   { src: '/homo/img7.jpeg', alt: 'Homoeopathy Department 7' },
   { src: '/homo/img8.JPG', alt: 'Homoeopathy Department 8' },
 ];
-
 const DEFAULTS = {
   maxVerticalRotationDeg: 5,
   dragSensitivity: 20,
