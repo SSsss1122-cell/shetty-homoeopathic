@@ -14,23 +14,23 @@ const DEFAULT_IMAGES = [
     alt: 'Campus View'
   },
   {
-    src: '/homo/img1.JPG',     
+    src: '/homo/img1.jpg',     
     alt: 'Homoeopathy Department'
   },
   {
-    src: '/homo/img2.JPG',
+    src: '/homo/img2.jpg',
     alt: 'Treatment Center'
   },
   {
-    src: '/homo/img3.JPG',
+    src: '/homo/img3.jpg',
     alt: 'Healing Campus'
   },
   {
-    src: '/homo/img4.JPG',
+    src: '/homo/img4.jpg',
     alt: 'Medical Facilities'
   },
   {
-    src: '/homo/img5.JPEG',
+    src: '/homo/img5.jpeg',
     alt: 'Student Practice'
   },
   {
