@@ -195,7 +195,7 @@ export default function Home() {
           >
             <DomeGallery
               fit={0.5}
-              minRadius={350}
+              minRadius={500}
               maxVerticalRotationDeg={20}
               segments={34}
               dragDampening={5}

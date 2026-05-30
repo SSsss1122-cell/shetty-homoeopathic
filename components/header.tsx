@@ -80,13 +80,14 @@ export default function Header() {
       <div className="bg-white border-b border-emerald-100/50 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 md:py-3">
           <div className="flex justify-between items-center">
-            {/* SGI Logo – Left */}
+            {/* SGI Logo – Left - FIXED */}
             <div className="flex items-center gap-2">
               <div className="relative w-10 h-10 md:w-12 md:h-12">
                 <Image
                   src="/SGi-Logo-4K_JPEG.jpg"
                   alt="SGI Logo"
                   fill
+                  sizes="48px"  // ← ADDED THIS (for mobile: 40px, desktop: 48px)
                   className="object-contain rounded-md"
                 />
               </div>
@@ -96,13 +97,14 @@ export default function Header() {
               </div>
             </div>
 
-            {/* Homoeopathy Logo – Right */}
+            {/* Homoeopathy Logo – Right - FIXED */}
             <div className="flex items-center gap-2">
               <div className="relative w-9 h-9 md:w-11 md:h-11">
                 <Image
                   src="/medical-logo.png"
                   alt="Homoeopathy College Logo"
                   fill
+                  sizes="44px"  // ← ADDED THIS (for mobile: 36px, desktop: 44px)
                   className="object-contain"
                 />
               </div>
