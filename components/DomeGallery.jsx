@@ -14,15 +14,15 @@ const DEFAULT_IMAGES = [
     alt: 'Campus View'
   },
   {
-    src: '/homo/img1.jpg',     // ./homo/ नहीं, /homo/ से start करें
+    src: '/homo/img1.JPG',     
     alt: 'Homoeopathy Department'
   },
   {
-    src: '/homo/img2.jpg',
+    src: '/homo/img2.JPG',
     alt: 'Treatment Center'
   },
   {
-    src: '/homo/img3.jpg',
+    src: '/homo/img3.JPG',
     alt: 'Healing Campus'
   },
   {
@@ -30,7 +30,7 @@ const DEFAULT_IMAGES = [
     alt: 'Medical Facilities'
   },
   {
-    src: '/homo/img5.jpeg',
+    src: '/homo/img5.JPEG',
     alt: 'Student Practice'
   },
   {
