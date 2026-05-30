@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useCallback } from 'react';
 import { useGesture } from '@use-gesture/react';
 const DEFAULT_IMAGES = [
   {
-    src: '/chairman.png',      // ./ नहीं, / से start करें
+    src: '/chairman.png',
     alt: 'Chairman'
   },
   {
@@ -14,7 +14,7 @@ const DEFAULT_IMAGES = [
     alt: 'Campus View'
   },
   {
-    src: '/homo/img1.jpg',     
+    src: '/homo/img1.jpg',
     alt: 'Homoeopathy Department'
   },
   {
@@ -34,19 +34,14 @@ const DEFAULT_IMAGES = [
     alt: 'Student Practice'
   },
   {
-    src: '/homo/img6.jpeg',
-    alt: 'Clinical Training'
-  },
-  {
     src: '/homo/img7.jpeg',
     alt: 'Modern Infrastructure'
   },
   {
     src: '/homo/img8.jpg',
     alt: 'Green Campus'
-  },
+  }
 ];
-  
  
 
 
