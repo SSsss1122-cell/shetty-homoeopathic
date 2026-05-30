@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import { useState, useEffect } from "react";
+import DomeGallery from '../components/DomeGallery';
 
 export default function Home() {
   const slides = [
@@ -156,6 +157,58 @@ export default function Home() {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Spacer between Hero and Dome Gallery */}
+      <div className="h-12 sm:h-16 md:h-20 lg:h-24 bg-gradient-to-b from-emerald-900/10 to-transparent"></div>
+
+      {/* Dome Gallery Section - Added below hero section with gap */}
+      <section className="relative py-12 sm:py-16 md:py-20 px-4 bg-black overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-black via-gray-900 to-black"></div>
+        <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-emerald-900/20 to-transparent"></div>
+        <div className="relative z-10 max-w-7xl mx-auto">
+          <div className="text-center mb-8 md:mb-12">
+            <div className="inline-block mb-3 animate-fade-in-up">
+              <p className="text-[11px] sm:text-xs md:text-sm text-emerald-400 font-bold inline-flex items-center gap-2 px-3 py-1.5 bg-black/50 backdrop-blur-md rounded-full border border-emerald-500/30">
+                ⚕️ 360° CAMPUS EXPERIENCE ⚕️
+              </p>
+            </div>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-3">
+              Explore Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-300">Virtual Dome Gallery</span>
+            </h2>
+            <p className="text-gray-300 text-sm sm:text-base md:text-lg max-w-2xl mx-auto">
+              Immerse yourself in our state-of-the-art facilities through an interactive 360° experience
+            </p>
+            <div className="w-20 h-0.5 bg-gradient-to-r from-emerald-400 to-teal-500 mx-auto mt-4 rounded-full"></div>
+          </div>
+          
+          <div 
+            className="w-full flex justify-center items-center rounded-2xl overflow-hidden shadow-2xl" 
+            style={{ 
+              width: '100%', 
+              height: '70vh', 
+              minHeight: '550px', 
+              maxHeight: '700px',
+            }}
+          >
+            <DomeGallery
+              fit={0.5}
+              minRadius={350}
+              maxVerticalRotationDeg={20}
+              segments={34}
+              dragDampening={5}
+              grayscale={false}
+            />
+          </div>
+          
+          <div className="text-center mt-6">
+            <p className="text-gray-400 text-xs sm:text-sm flex items-center justify-center gap-2">
+              <span>🖱️</span> Drag to rotate the sphere 
+              <span className="mx-2">•</span> 
+              <span>✨</span> Click on any image to enlarge
+            </p>
           </div>
         </div>
       </section>

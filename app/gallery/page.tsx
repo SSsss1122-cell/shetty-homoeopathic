@@ -133,17 +133,7 @@ export default function GalleryPage() {
             <span className="text-lg">🖼️</span>
             <span>Photos</span>
           </button>
-          <button
-            onClick={() => setActiveTab("dome")}
-            className={`flex items-center gap-2 px-5 md:px-8 py-2.5 rounded-xl font-semibold transition-all duration-300 ${
-              activeTab === "dome"
-                ? "bg-gradient-to-r from-emerald-600 to-teal-700 text-white shadow-md transform scale-105"
-                : "text-gray-600 hover:bg-emerald-100 hover:text-emerald-700"
-            }`}
-          >
-            <span className="text-lg">🌐</span>
-            <span>3D Dome</span>
-          </button>
+         
         </div>
       </div>
 
@@ -244,26 +234,7 @@ export default function GalleryPage() {
         </div>
       )}
 
-      {/* DOME GALLERY SECTION - Optimized height for globe visibility */}
-      {activeTab === "dome" && (
-        <div className="w-full py-4">
-          <div className="flex items-center gap-3 mb-4 max-w-6xl mx-auto px-4">
-            <div className="text-3xl">🌐</div>
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-800">3D Interactive Gallery</h2>
-            <div className="flex-1 h-px bg-gradient-to-r from-emerald-300 to-transparent"></div>
-          </div>
-          <div className="w-full flex justify-center items-center" style={{ width: '100%', height: '70vh', minHeight: '550px', maxHeight: '700px' }}>
-            <DomeGallery
-              fit={0.8}
-              minRadius={400}
-              maxVerticalRotationDeg={0}
-              segments={34}
-              dragDampening={2}
-              grayscale
-            />
-          </div>
-        </div>
-      )}
+     
 
       {/* Enhanced Lightbox with navigation and close button */}
       {lightbox.open && (
