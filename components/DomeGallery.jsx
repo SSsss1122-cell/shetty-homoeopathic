@@ -1,8 +1,7 @@
 import { useEffect, useMemo, useRef, useCallback } from 'react';
 import { useGesture } from '@use-gesture/react';
-
-// FIXED: Case-sensitive paths matching your actual files
 const DEFAULT_IMAGES = [
+  // Public folder images
   { src: '/chairman.png', alt: 'Chairman' },
   { src: '/img1.jpeg', alt: 'Campus View 1' },
   { src: '/img2.jpeg', alt: 'Campus View 2' },
@@ -12,15 +11,18 @@ const DEFAULT_IMAGES = [
   { src: '/img6.jpeg', alt: 'Campus View 6' },
   { src: '/img7.jpeg', alt: 'Campus View 7' },
   { src: '/img8.jpeg', alt: 'Campus View 8' },
-  // homo folder images - REMOVED img2.JPG since it doesn't exist
+  
+  // Homo folder images (img2.JPG is missing, so skipping it)
   { src: '/homo/img1.JPG', alt: 'Homoeopathy Department 1' },
-  { src: '/homo/img3.JPG', alt: 'Homoeopathy Department 3' },  // img2 removed
+  // img2.JPG is MISSING - don't include it
+  { src: '/homo/img3.JPG', alt: 'Homoeopathy Department 3' },
   { src: '/homo/img4.JPG', alt: 'Homoeopathy Department 4' },
   { src: '/homo/img5.jpeg', alt: 'Homoeopathy Department 5' },
   { src: '/homo/img6.jpeg', alt: 'Homoeopathy Department 6' },
   { src: '/homo/img7.jpeg', alt: 'Homoeopathy Department 7' },
   { src: '/homo/img8.JPG', alt: 'Homoeopathy Department 8' },
 ];
+
 const DEFAULTS = {
   maxVerticalRotationDeg: 5,
   dragSensitivity: 20,
@@ -113,7 +115,7 @@ export default function DomeGallery({
   openedImageHeight = '400px',
   imageBorderRadius = '30px',
   openedImageBorderRadius = '30px',
-  grayscale = false  // Changed to false for colorful images
+  grayscale = true
 }) {
   const rootRef = useRef(null);
   const mainRef = useRef(null);
@@ -656,20 +658,7 @@ export default function DomeGallery({
   }, []);
 
   const cssStyles = `
-    .dg-scroll-lock {
-      position: fixed !important;
-      top: 0;
-      left: 0;
-      width: 100% !important;
-      height: 100% !important;
-      overflow: hidden !important;
-      touch-action: none !important;
-      overscroll-behavior: contain !important;
-    }
     .sphere-root {
-      position: relative;
-      width: 100%;
-      height: 100%;
       --radius: 520px;
       --viewer-pad: 72px;
       --circ: calc(var(--radius) * 3.14);
@@ -678,12 +667,12 @@ export default function DomeGallery({
       --item-width: calc(var(--circ) / var(--segments-x));
       --item-height: calc(var(--circ) / var(--segments-y));
     }
+    
     .sphere-root * {
       box-sizing: border-box;
     }
-    .sphere, .sphere-item, .item__image {
-      transform-style: preserve-3d;
-    }
+    .sphere, .sphere-item, .item__image { transform-style: preserve-3d; }
+    
     .stage {
       width: 100%;
       height: 100%;
@@ -695,11 +684,13 @@ export default function DomeGallery({
       perspective: calc(var(--radius) * 2);
       perspective-origin: 50% 50%;
     }
+    
     .sphere {
       transform: translateZ(calc(var(--radius) * -1));
       will-change: transform;
       position: absolute;
     }
+    
     .sphere-item {
       width: calc(var(--item-width) * var(--item-size-x));
       height: calc(var(--item-height) * var(--item-size-y));
@@ -716,16 +707,29 @@ export default function DomeGallery({
                  rotateX(calc(var(--rot-x) * (var(--offset-y) - ((var(--item-size-y) - 1) / 2)) + var(--rot-x-delta, 0deg))) 
                  translateZ(var(--radius));
     }
+    
     .sphere-root[data-enlarging="true"] .scrim {
       opacity: 1 !important;
       pointer-events: all !important;
     }
+    
     @media (max-aspect-ratio: 1/1) {
       .viewer-frame {
         height: auto !important;
         width: 100% !important;
       }
     }
+    
+    // body.dg-scroll-lock {
+    //   position: fixed !important;
+    //   top: 0;
+    //   left: 0;
+    //   width: 100% !important;
+    //   height: 100% !important;
+    //   overflow: hidden !important;
+    //   touch-action: none !important;
+    //   overscroll-behavior: contain !important;
+    // }
     .item__image {
       position: absolute;
       inset: 10px;
@@ -826,15 +830,6 @@ export default function DomeGallery({
                       style={{
                         backfaceVisibility: 'hidden',
                         filter: `var(--image-filter, ${grayscale ? 'grayscale(1)' : 'none'})`
-                      }}
-                      onError={(e) => {
-                        console.error('Failed to load image:', it.src);
-                        e.target.style.backgroundColor = '#333';
-                        e.target.style.display = 'flex';
-                        e.target.style.alignItems = 'center';
-                        e.target.style.justifyContent = 'center';
-                        e.target.style.color = '#fff';
-                        e.target.style.fontSize = '12px';
                       }}
                     />
                   </div>
