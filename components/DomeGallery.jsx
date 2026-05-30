@@ -1,56 +1,54 @@
 import { useEffect, useMemo, useRef, useCallback } from 'react';
 import { useGesture } from '@use-gesture/react';
-
 const DEFAULT_IMAGES = [
   {
-    src: './chairman.png',
-    alt: 'Abstract art'
-  },
-   {
-    src: './img6.jpeg',
-    alt: 'Abstract art'
-  },
-   {
-    src: './img7.jpeg',
-    alt: 'Abstract art'
-  },{
-    src: './homo/img1.jpg',
-    alt: 'Abstract art'
+    src: '/chairman.png',      // ./ नहीं, / से start करें
+    alt: 'Chairman'
   },
   {
-    src: './homo/img2.jpg',
-    alt: 'Abstract art'
-  },
-   {
-    src: './homo/img3.jpg',
-    alt: 'Abstract art'
-  },
-    {
-    src: './homo/img4.jpg',
-    alt: 'Abstract art'
-  },
-   {
-    src: './homo/img5.jpeg',
-    alt: 'Abstract art'
-  },
-   {
-    src: './homo/img6.jpeg',
-    alt: 'Abstract art'
+    src: '/img6.jpeg',
+    alt: 'Campus View'
   },
   {
-    src: './homo/img7.jpeg',
-    alt: 'Abstract art'
+    src: '/img7.jpeg',
+    alt: 'Campus View'
   },
-   {
-    src: './homo/img8.jpg',
-    alt: 'Abstract art'
+  {
+    src: '/homo/img1.jpg',     // ./homo/ नहीं, /homo/ से start करें
+    alt: 'Homoeopathy Department'
   },
-
-
-  
+  {
+    src: '/homo/img2.jpg',
+    alt: 'Treatment Center'
+  },
+  {
+    src: '/homo/img3.jpg',
+    alt: 'Healing Campus'
+  },
+  {
+    src: '/homo/img4.jpg',
+    alt: 'Medical Facilities'
+  },
+  {
+    src: '/homo/img5.jpeg',
+    alt: 'Student Practice'
+  },
+  {
+    src: '/homo/img6.jpeg',
+    alt: 'Clinical Training'
+  },
+  {
+    src: '/homo/img7.jpeg',
+    alt: 'Modern Infrastructure'
+  },
+  {
+    src: '/homo/img8.jpg',
+    alt: 'Green Campus'
+  },
+];
   
  
-];
+
 
 const DEFAULTS = {
   maxVerticalRotationDeg: 5,
