@@ -35,6 +35,7 @@ const LogoLoop = ({ items = [], speed = 1, direction = 'left' }) => {
 
   if (!items.length) return null;
 
+  // Duplicate items for seamless loop
   const duplicatedItems = [...items, ...items, ...items];
 
   return (
