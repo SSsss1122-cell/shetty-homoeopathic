@@ -60,14 +60,16 @@ export default function Home() {
   {/* Single fixed background image - only first image */}
   <div className="absolute inset-0">
     <Image
-      src="/state%20of%20art.jpg"
-      alt="Modern Medical Infrastructure"
-      fill
-      className="object-cover"
-      priority={true}
-      sizes="100vw"
-      onError={(e) => ((e.target).style.display = 'none')}
-    />
+  src="/state%20of%20art.jpg"
+  alt="Modern Medical Infrastructure"
+  fill
+  className="object-cover"
+  priority={true}
+  sizes="100vw"
+  onError={(e) => {
+    e.currentTarget.style.display = 'none';
+  }}
+/>
     <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70"></div>
   </div>
   
