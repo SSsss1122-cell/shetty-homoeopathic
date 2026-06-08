@@ -24,15 +24,15 @@ export default function Home() {
     {
       name: "Mahesh Kumar",
       emoji: "⚕️",
-      image: "/mahesh-kumar.png",
+      image: "/homo/s1.jpeg",
       year: "3rd year BHMS",
       rating: 5,
       text: "I have started to explore myself after joining here in many ways as I have newly found that I have leadership qualities to manage any task given to me. I have gained more confidence to express myself without hesitation than before."
     },
     {
-      name: "Gurusiddamma",
+      name: "rahul",
       emoji: "🌿",
-      image: "/gurusiddamma.png",
+      image: "/homo/s2.jpeg",
       year: "3rd year BHMS",
       rating: 5,
       text: "I'm glad that I chose Shetty Homoeopathic Medical College as my college of choice as I stay at the girls hostel on the campus it's very good with all the facilities and secure."
@@ -40,15 +40,15 @@ export default function Home() {
     {
       name: "Nagesh",
       emoji: "🍃",
-      image: "/nagesh.png",
+      image: "/homo/s3.jpeg",
       year: "1st year BHMS",
       rating: 5,
       text: "Good environment to learn with excellent teaching faculty as their care and attention to each and every student is same. Regular tests and exams are conducted as it helps me finding better me everyday."
     },
     {
-      name: "Dhanashreya",
+      name: "nilkant",
       emoji: "🌱",
-      image: "/dhanashreya.png",
+      image: "/homo/s4.jpeg",
       year: "1st year BHMS",
       rating: 5,
       text: "Extracurricular activities and Sports are also given equal importance as Curriculum. Both indoor and outdoor sports are given importance and the support from our management for sports is incredible."
@@ -214,42 +214,129 @@ export default function Home() {
       </section>
 
       {/* About Section */}
-      <section className="relative py-12 sm:py-16 md:py-24 px-4 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-emerald-50 via-white to-teal-50"></div>
-        <div className="absolute top-0 right-0 w-80 h-80 bg-emerald-200 rounded-full blur-3xl opacity-20"></div>
-        <div className="absolute bottom-0 left-0 w-80 h-80 bg-teal-200 rounded-full blur-3xl opacity-20"></div>
-        <div className="relative z-10 max-w-5xl mx-auto">
-          <div className="text-center mb-8 md:mb-12">
-            <div className="w-16 sm:w-20 h-0.5 bg-gradient-to-r from-emerald-400 to-teal-500 mx-auto mb-5 rounded-full"></div>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-emerald-800 mb-3">⚕️ About the Trust ⚕️</h2>
-            <p className="text-emerald-600 text-sm sm:text-base md:text-lg font-medium">Empowering young minds since 2011</p>
-          </div>
-          <div className="grid md:grid-cols-2 gap-5 md:gap-8">
-            <div className="space-y-5">
-              {[
-                { icon: "🏛️ ⚕️", text: "Shetty Group of Institutions is a part of Shetty Sangappa Memorial Trust established in 2011 to empower young budding brains with technical and entrepreneurial knowledge and skills, assisting them in holistic growth." },
-                { icon: "📍 🌿", text: "Located just on the other side of the Highway (NH 150) on Shahbad road, Kalaburagi, the college nestles amidst sprawling 17 acres of greenery with a hilly backdrop." }
-              ].map((item, idx) => (
-                <div key={idx} className="bg-white/80 backdrop-blur-sm p-4 md:p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border border-emerald-100 group">
-                  <div className="text-2xl md:text-3xl mb-3 group-hover:scale-110 transition-transform duration-300 inline-block">{item.icon}</div>
-                  <p className="text-gray-700 leading-relaxed text-sm md:text-base">{item.text}</p>
-                </div>
-              ))}
+    <section className="relative py-16 sm:py-20 md:py-28 px-4 overflow-hidden">
+  {/* Animated Background */}
+  <div className="absolute inset-0 bg-gradient-to-br from-emerald-50 via-white to-teal-50"></div>
+  <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-200 rounded-full blur-3xl opacity-30 animate-pulse-slow"></div>
+  <div className="absolute bottom-0 left-0 w-96 h-96 bg-teal-200 rounded-full blur-3xl opacity-30 animate-pulse-slow" style={{ animationDelay: '2s' }}></div>
+  
+  {/* Decorative floating elements */}
+  <div className="absolute top-20 left-10 text-4xl opacity-10 animate-float">⚕️</div>
+  <div className="absolute bottom-20 right-10 text-4xl opacity-10 animate-float-delayed">🌿</div>
+  <div className="absolute top-1/3 right-1/4 text-3xl opacity-5 animate-spin-slow">🍃</div>
+  
+  <div className="relative z-10 max-w-6xl mx-auto">
+    {/* Section Header */}
+    <div className="text-center mb-12 md:mb-16">
+      <div className="inline-flex items-center gap-2 bg-emerald-100/80 backdrop-blur-sm px-4 py-2 rounded-full border border-emerald-200 mb-4 animate-fade-in-up">
+        <span className="text-emerald-600 text-sm">⚕️</span>
+        <span className="text-emerald-700 text-xs font-semibold tracking-wider">EST. 2011</span>
+        <span className="text-emerald-600 text-sm">🌿</span>
+      </div>
+      
+      <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
+        <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-700 to-teal-600">
+          About the Trust
+        </span>
+      </h2>
+      
+      <div className="w-24 h-1 bg-gradient-to-r from-emerald-400 to-teal-500 mx-auto rounded-full mb-4"></div>
+      
+      <p className="text-gray-600 text-sm sm:text-base md:text-lg max-w-2xl mx-auto">
+        Empowering young minds through quality education and holistic development
+      </p>
+    </div>
+
+    <div className="grid lg:grid-cols-2 gap-8 md:gap-10">
+      {/* Left Column */}
+      <div className="space-y-6">
+        {/* Trust Card */}
+        <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-emerald-100 hover:shadow-xl transition-all duration-300 group hover:-translate-y-1">
+          <div className="flex items-center gap-4 mb-4">
+            <div className="w-14 h-14 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+              <span className="text-2xl">🏛️</span>
             </div>
-            <div className="space-y-5">
-              {[
-                { icon: "🌿 🍃", text: "The campus breathes fresh air of nature with vast greenery, free from pollution. The ambience is ideal for learning, research, living and exploration." },
-                { icon: "✨ ⚕️", text: "This education major has set a hallmark standard in professional education - redefining its own standards consistently.", highlight: true }
-              ].map((item, idx) => (
-                <div key={idx} className={`p-4 md:p-6 rounded-xl shadow-md transition-all duration-300 hover:-translate-y-1 ${item.highlight ? "bg-gradient-to-r from-emerald-50 to-white border-l-4 border-emerald-500 hover:shadow-lg" : "bg-white/80 backdrop-blur-sm border border-emerald-100 hover:shadow-lg"}`}>
-                  <div className="text-2xl md:text-3xl mb-3 inline-block">{item.icon}</div>
-                  <p className={`leading-relaxed text-sm md:text-base ${item.highlight ? "font-semibold text-emerald-800" : "text-gray-700"}`}>{item.text}</p>
-                </div>
-              ))}
+            <div>
+              <h3 className="font-bold text-gray-800 text-lg">Shetty Sangappa Memorial Trust</h3>
+              <p className="text-emerald-600 text-sm font-medium">Empowering since 2011</p>
+            </div>
+          </div>
+          <p className="text-gray-700 leading-relaxed">
+            Shetty Group of Institutions is a part of Shetty Sangappa Memorial Trust established in 2011 to empower young budding brains with technical and entrepreneurial knowledge and skills, assisting them in holistic growth.
+          </p>
+        </div>
+
+        {/* Location Card */}
+        <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-md border border-emerald-100 hover:shadow-xl transition-all duration-300 group hover:-translate-y-1">
+          <div className="flex items-start gap-4">
+            <div className="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+              <span className="text-2xl">📍</span>
+            </div>
+            <div>
+              <h3 className="font-semibold text-gray-800 mb-2">Prime Location</h3>
+              <p className="text-gray-600 leading-relaxed">
+                Located just on the other side of the Highway (NH 150) on Shahbad road, Kalaburagi, the college nestles amidst sprawling 17 acres of greenery with a hilly backdrop.
+              </p>
             </div>
           </div>
         </div>
-      </section>
+
+        {/* Achievement Card */}
+        <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-5 border border-emerald-100">
+          <div className="flex items-center gap-3 mb-2">
+            <span className="text-2xl">🏆</span>
+            <span className="text-emerald-700 font-semibold">Recognized Excellence</span>
+          </div>
+          <p className="text-gray-600 text-sm">
+            Approved by NCH, Ministry of Ayush, Govt. of India | Affiliated to RGUHS, Bengaluru
+          </p>
+        </div>
+      </div>
+
+      {/* Right Column */}
+      <div className="space-y-6">
+        {/* Campus Card */}
+        <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-emerald-100 hover:shadow-xl transition-all duration-300 group hover:-translate-y-1">
+          <div className="flex items-center gap-4 mb-4">
+            <div className="w-14 h-14 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+              <span className="text-2xl">🌿</span>
+            </div>
+            <div>
+              <h3 className="font-bold text-gray-800 text-lg">Green Campus</h3>
+              <p className="text-emerald-600 text-sm font-medium">Eco-friendly Environment</p>
+            </div>
+          </div>
+          <p className="text-gray-700 leading-relaxed">
+            The campus breathes fresh air of nature with vast greenery, free from pollution. The ambience is ideal for learning, research, living and exploration.
+          </p>
+        </div>
+
+        {/* Mission Card - Now matching other cards */}
+        <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-md border border-emerald-100 hover:shadow-xl transition-all duration-300 group hover:-translate-y-1">
+          <div className="flex items-center gap-4 mb-4">
+            <div className="w-14 h-14 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+              <span className="text-2xl">✨</span>
+            </div>
+            <div>
+              <h3 className="font-bold text-gray-800 text-lg">Our Mission</h3>
+              <p className="text-emerald-600 text-sm font-medium">Excellence in Education</p>
+            </div>
+          </div>
+          <p className="text-gray-700 leading-relaxed font-medium">
+            "This education major has set a hallmark standard in professional education - redefining its own standards consistently."
+          </p>
+        </div>
+      </div>
+    </div>
+
+    {/* Decorative bottom wave */}
+    <div className="absolute bottom-0 left-0 right-0 h-20 pointer-events-none">
+      <svg className="w-full h-full text-white/5" viewBox="0 0 1200 120" preserveAspectRatio="none">
+        <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="currentColor"></path>
+      </svg>
+    </div>
+  </div>
+</section>
 
       {/* Photo Gallery */}
       <section className="py-12 sm:py-16 md:py-24 px-4 bg-white">
