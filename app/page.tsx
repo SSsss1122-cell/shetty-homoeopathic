@@ -2,6 +2,9 @@
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import DomeGallery from '../components/DomeGallery';
+import AnimatedList from '../components/AnimatedList';
+import LogoLoop from '../components/LogoLoop';
+import { motion, useAnimationFrame, useMotionValue } from 'framer-motion';  
 
 export default function Home() {
   const slides = [
@@ -11,160 +14,132 @@ export default function Home() {
   ];
 
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
+    setIsMounted(true);
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
     }, 5000);
     return () => clearInterval(interval);
   }, [slides.length]);
 
-  // ✅ UPDATED: All student photos use .png extension
-  const testimonials = [
-    {
-      name: "Mahesh Kumar",
-      emoji: "⚕️",
-      image: "/homo/s1.jpeg",
-      year: "3rd year BHMS",
-      rating: 5,
-      text: "I have started to explore myself after joining here in many ways as I have newly found that I have leadership qualities to manage any task given to me. I have gained more confidence to express myself without hesitation than before."
-    },
-    {
-      name: "rahul",
-      emoji: "🌿",
-      image: "/homo/s2.jpeg",
-      year: "3rd year BHMS",
-      rating: 5,
-      text: "I'm glad that I chose Shetty Homoeopathic Medical College as my college of choice as I stay at the girls hostel on the campus it's very good with all the facilities and secure."
-    },
-    {
-      name: "Nagesh",
-      emoji: "🍃",
-      image: "/homo/s3.jpeg",
-      year: "1st year BHMS",
-      rating: 5,
-      text: "Good environment to learn with excellent teaching faculty as their care and attention to each and every student is same. Regular tests and exams are conducted as it helps me finding better me everyday."
-    },
-    {
-      name: "nilkant",
-      emoji: "🌱",
-      image: "/homo/s4.jpeg",
-      year: "1st year BHMS",
-      rating: 5,
-      text: "Extracurricular activities and Sports are also given equal importance as Curriculum. Both indoor and outdoor sports are given importance and the support from our management for sports is incredible."
-    }
+  // Stats items for LogoLoop
+  const statsItems = [
+    <div key="stat1" className="bg-black/30 backdrop-blur-sm px-4 sm:px-6 py-2 sm:py-3 rounded-xl border border-emerald-400/20 hover:border-emerald-400/50 transition text-center min-w-[120px] sm:min-w-[140px] mx-1 sm:mx-2">
+      <div className="text-xl sm:text-2xl md:text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 to-teal-200">
+        17+
+      </div>
+      <div className="text-xs sm:text-sm font-bold text-white">Acres</div>
+      <p className="text-[8px] sm:text-xs text-gray-300">🌿 Green Campus</p>
+    </div>,
+    
+    <div key="stat2" className="bg-black/30 backdrop-blur-sm px-4 sm:px-6 py-2 sm:py-3 rounded-xl border border-emerald-400/20 hover:border-emerald-400/50 transition text-center min-w-[120px] sm:min-w-[140px] mx-1 sm:mx-2">
+      <div className="text-xl sm:text-2xl md:text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 to-teal-200">
+        6+
+      </div>
+      <div className="text-xs sm:text-sm font-bold text-white">Disciplines</div>
+      <p className="text-[8px] sm:text-xs text-gray-300">⚕️ Allied Sciences</p>
+    </div>,
+    
+    <div key="stat3" className="bg-black/30 backdrop-blur-sm px-4 sm:px-6 py-2 sm:py-3 rounded-xl border border-emerald-400/20 hover:border-emerald-400/50 transition text-center min-w-[120px] sm:min-w-[140px] mx-1 sm:mx-2">
+      <div className="text-xl sm:text-2xl md:text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 to-teal-200">
+        1000+
+      </div>
+      <div className="text-xs sm:text-sm font-bold text-white">Students</div>
+      <p className="text-[8px] sm:text-xs text-gray-300">👨‍⚕️ Future Healers</p>
+    </div>,
   ];
 
   return (
     <main className="bg-white overflow-x-hidden">
       {/* Hero Section */}
-      <section className="relative min-h-[500px] md:min-h-[600px] pt-16 sm:pt-20 pb-8 sm:pb-12 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-emerald-900 to-teal-900 -z-10"></div>
-        {slides.map((slide, index) => (
-          <div
-            key={index}
-            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-              index === currentSlide ? "opacity-100" : "opacity-0"
-            }`}
-          >
-            <Image
-              src={slide.url}
-              alt={slide.title}
-              fill
-              className="object-cover"
-              priority={index === 0}
-              sizes="100vw"
-              onError={(e) => ((e.target as HTMLElement).style.display = 'none')}
-            />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70"></div>
-          </div>
-        ))}
-        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2.5 z-20">
-          {slides.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setCurrentSlide(index)}
-              className="transition-all duration-300 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-400"
-              aria-label={`Go to slide ${index + 1}`}
-            >
-              <span className={`block transition-all duration-300 rounded-full ${
-                index === currentSlide ? "bg-emerald-400 w-8 h-2.5" : "bg-white/40 hover:bg-white/70 w-2.5 h-2.5"
-              }`} />
-            </button>
-          ))}
-        </div>
-        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-4">
-            <div className="inline-block mb-3 animate-fade-in-up">
-              <p className="text-[11px] sm:text-xs md:text-sm text-emerald-200 font-bold inline-flex items-center gap-2 px-3 py-1.5 bg-black/30 backdrop-blur-md rounded-full border border-emerald-400/30">
-                ⚕️ SHETTY SANGAPPA MEMORIAL TRUST ⚕️
-              </p>
-            </div>
-            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-2 text-white drop-shadow-2xl">
-              SHETTY HOMOEOPATHY
-              <span className="block text-emerald-300">COLLEGE & HOSPITAL</span>
-            </h1>
-            <div className="flex flex-wrap justify-center gap-2 sm:gap-5 text-[11px] sm:text-xs md:text-sm text-gray-200 mb-3">
-              <a href="tel:+919663363444" className="flex items-center gap-1 hover:text-emerald-300 transition hover:scale-105">
-                📞 +91 9663363444
-              </a>
-              <span className="hidden sm:inline text-emerald-400/50">|</span>
-              <a href="mailto:info@shettyhomoeopathy.edu.in" className="flex items-center gap-1 hover:text-emerald-300 transition hover:scale-105">
-                ✉️ info@shettyhomoeopathy.edu.in
-              </a>
-            </div>
-            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-emerald-600 to-teal-700 text-white px-3 py-1 rounded-full text-[10px] sm:text-xs font-semibold shadow-lg">
-              <span>✅</span>
-              <span>Approved by NCH | MINISTRY OF AYUSH</span>
-            </div>
-          </div>
-          <div className="text-center mb-5">
-            <h2 className="text-base sm:text-lg md:text-2xl lg:text-3xl font-bold mb-1 text-white drop-shadow-lg">
-              SHETTY HOMOEOMEDICAL COLLEGE
-            </h2>
-            <div className="w-12 sm:w-16 h-0.5 bg-gradient-to-r from-emerald-400 to-teal-500 mx-auto my-2 rounded-full"></div>
-            <p className="text-[11px] sm:text-xs md:text-sm text-gray-200 font-medium">
-              ⚕️ Affiliated to RGUHS, Bengaluru | Shetty Group of Institutions
-            </p>
-          </div>
-          <div className="bg-black/40 backdrop-blur-md rounded-lg p-3 md:p-4 my-4 border border-emerald-400/30 shadow-md">
-            <h3 className="text-xs sm:text-sm md:text-base font-bold text-white text-center">
-              &ldquo;Empowering Minds: Excellence across Homoeopathy, Engineering, Ayurveda & more&rdquo;
-            </h3>
-          </div>
-          <div className="flex flex-wrap justify-center gap-2 sm:gap-3 my-5">
-            <button className="group bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-4 sm:px-5 md:px-6 py-1.5 md:py-2 rounded-full font-bold text-xs sm:text-sm hover:from-emerald-600 hover:to-teal-700 transition shadow-md flex items-center gap-1">
-              <span>⚕️ Apply Now</span>
-              <span className="transition-transform group-hover:translate-x-1">→</span>
-            </button>
-            <button className="group border border-white text-white px-4 sm:px-5 md:px-6 py-1.5 md:py-2 rounded-full font-bold text-xs sm:text-sm hover:bg-white/10 transition backdrop-blur-sm">
-              🌿 Virtual Tour
-            </button>
-          </div>
-          <div className="grid grid-cols-3 gap-2 sm:gap-3 mt-6 pt-4 border-t border-emerald-400/30 text-center">
-            {[
-              { value: "17+", label: "Acres", desc: "🌿 Green Campus" },
-              { value: "6+", label: "Disciplines", desc: "⚕️ Allied Sciences" },
-              { value: "1000+", label: "Students", desc: "👨‍⚕️ Future Healers" }
-            ].map((stat, idx) => (
-              <div key={idx} className="group">
-                <div className="bg-black/30 backdrop-blur-sm p-1.5 sm:p-2 md:p-3 rounded-lg border border-emerald-400/20 group-hover:border-emerald-400/50 transition">
-                  <div className="text-base sm:text-xl md:text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 to-teal-200">
-                    {stat.value}
-                  </div>
-                  <div className="text-xs sm:text-sm md:text-base font-bold text-white">{stat.label}</div>
-                  <p className="text-[9px] sm:text-[10px] md:text-xs text-gray-300">{stat.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+     <section className="relative min-h-[500px] md:min-h-[600px] pt-16 sm:pt-20 pb-8 sm:pb-12 overflow-hidden">
+  <div className="absolute inset-0 bg-gradient-to-br from-emerald-900 to-teal-900 -z-10"></div>
+  
+  {/* Single fixed background image - only first image */}
+  <div className="absolute inset-0">
+    <Image
+      src="/state%20of%20art.jpg"
+      alt="Modern Medical Infrastructure"
+      fill
+      className="object-cover"
+      priority={true}
+      sizes="100vw"
+      onError={(e) => ((e.target).style.display = 'none')}
+    />
+    <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70"></div>
+  </div>
+  
+  <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="text-center mb-4">
+      <div className="inline-block mb-3 animate-fade-in-up">
+        <p className="text-[11px] sm:text-xs md:text-sm text-emerald-200 font-bold inline-flex items-center gap-2 px-3 py-1.5 bg-black/30 backdrop-blur-md rounded-full border border-emerald-400/30">
+          ⚕️ SHETTY SANGAPPA MEMORIAL TRUST ⚕️
+        </p>
+      </div>
+      <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-2 text-white drop-shadow-2xl">
+        SHETTY HOMOEOPATHY
+        <span className="block text-emerald-300">COLLEGE & HOSPITAL</span>
+      </h1>
+      <div className="flex flex-wrap justify-center gap-2 sm:gap-5 text-[11px] sm:text-xs md:text-sm text-gray-200 mb-3">
+        <a href="tel:+919663363444" className="flex items-center gap-1 hover:text-emerald-300 transition hover:scale-105">
+          📞 +91 9663363444
+        </a>
+        <span className="hidden sm:inline text-emerald-400/50">|</span>
+        <a href="mailto:info@shettyhomoeopathy.edu.in" className="flex items-center gap-1 hover:text-emerald-300 transition hover:scale-105">
+          ✉️ info@shettyhomoeopathy.edu.in
+        </a>
+      </div>
+      <div className="inline-flex items-center gap-2 bg-gradient-to-r from-emerald-600 to-teal-700 text-white px-3 py-1 rounded-full text-[10px] sm:text-xs font-semibold shadow-lg">
+        <span>✅</span>
+        <span>Approved by NCH | MINISTRY OF AYUSH</span>
+      </div>
+    </div>
+    
+    <div className="text-center mb-5">
+      <h2 className="text-base sm:text-lg md:text-2xl lg:text-3xl font-bold mb-1 text-white drop-shadow-lg">
+        SHETTY HOMOEOMEDICAL COLLEGE
+      </h2>
+      <div className="w-12 sm:w-16 h-0.5 bg-gradient-to-r from-emerald-400 to-teal-500 mx-auto my-2 rounded-full"></div>
+      <p className="text-[11px] sm:text-xs md:text-sm text-gray-200 font-medium">
+        ⚕️ Affiliated to RGUHS, Bengaluru | Shetty Group of Institutions
+      </p>
+    </div>
+    
+    <div className="bg-black/40 backdrop-blur-md rounded-lg p-3 md:p-4 my-4 border border-emerald-400/30 shadow-md">
+      <h3 className="text-xs sm:text-sm md:text-base font-bold text-white text-center">
+        &ldquo;Empowering Minds: Excellence across Homoeopathy, Engineering, Ayurveda & more&rdquo;
+      </h3>
+    </div>
+    
+    <div className="flex flex-wrap justify-center gap-2 sm:gap-3 my-5">
+      <button className="group bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-4 sm:px-5 md:px-6 py-1.5 md:py-2 rounded-full font-bold text-xs sm:text-sm hover:from-emerald-600 hover:to-teal-700 transition shadow-md flex items-center gap-1">
+        <span>⚕️ Apply Now</span>
+        <span className="transition-transform group-hover:translate-x-1">→</span>
+      </button>
+      <button className="group border border-white text-white px-4 sm:px-5 md:px-6 py-1.5 md:py-2 rounded-full font-bold text-xs sm:text-sm hover:bg-white/10 transition backdrop-blur-sm">
+        🌿 Virtual Tour
+      </button>
+    </div>
+    
+    {/* LogoLoop Stats - Animated Marquee */}
+    {isMounted && (
+      <div className="mt-6 pt-4 border-t border-emerald-400/30">
+        <LogoLoop 
+          speed={0.8}
+          direction="left"
+          items={statsItems}
+        />
+      </div>
+    )}
+  </div>
+</section>
 
-      {/* Spacer between Hero and Dome Gallery */}
+      {/* Spacer */}
       <div className="h-12 sm:h-16 md:h-20 lg:h-24 bg-gradient-to-b from-emerald-900/10 to-transparent"></div>
 
-      {/* Dome Gallery Section - Added below hero section with gap */}
+      {/* Dome Gallery Section - Only One */}
       <section className="relative py-12 sm:py-16 md:py-20 px-4 bg-black overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-black via-gray-900 to-black"></div>
         <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-emerald-900/20 to-transparent"></div>
@@ -214,129 +189,122 @@ export default function Home() {
       </section>
 
       {/* About Section */}
-    <section className="relative py-16 sm:py-20 md:py-28 px-4 overflow-hidden">
-  {/* Animated Background */}
-  <div className="absolute inset-0 bg-gradient-to-br from-emerald-50 via-white to-teal-50"></div>
-  <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-200 rounded-full blur-3xl opacity-30 animate-pulse-slow"></div>
-  <div className="absolute bottom-0 left-0 w-96 h-96 bg-teal-200 rounded-full blur-3xl opacity-30 animate-pulse-slow" style={{ animationDelay: '2s' }}></div>
-  
-  {/* Decorative floating elements */}
-  <div className="absolute top-20 left-10 text-4xl opacity-10 animate-float">⚕️</div>
-  <div className="absolute bottom-20 right-10 text-4xl opacity-10 animate-float-delayed">🌿</div>
-  <div className="absolute top-1/3 right-1/4 text-3xl opacity-5 animate-spin-slow">🍃</div>
-  
-  <div className="relative z-10 max-w-6xl mx-auto">
-    {/* Section Header */}
-    <div className="text-center mb-12 md:mb-16">
-      <div className="inline-flex items-center gap-2 bg-emerald-100/80 backdrop-blur-sm px-4 py-2 rounded-full border border-emerald-200 mb-4 animate-fade-in-up">
-        <span className="text-emerald-600 text-sm">⚕️</span>
-        <span className="text-emerald-700 text-xs font-semibold tracking-wider">EST. 2011</span>
-        <span className="text-emerald-600 text-sm">🌿</span>
-      </div>
-      
-      <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
-        <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-700 to-teal-600">
-          About the Trust
-        </span>
-      </h2>
-      
-      <div className="w-24 h-1 bg-gradient-to-r from-emerald-400 to-teal-500 mx-auto rounded-full mb-4"></div>
-      
-      <p className="text-gray-600 text-sm sm:text-base md:text-lg max-w-2xl mx-auto">
-        Empowering young minds through quality education and holistic development
-      </p>
-    </div>
-
-    <div className="grid lg:grid-cols-2 gap-8 md:gap-10">
-      {/* Left Column */}
-      <div className="space-y-6">
-        {/* Trust Card */}
-        <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-emerald-100 hover:shadow-xl transition-all duration-300 group hover:-translate-y-1">
-          <div className="flex items-center gap-4 mb-4">
-            <div className="w-14 h-14 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
-              <span className="text-2xl">🏛️</span>
+      <section className="relative py-16 sm:py-20 md:py-28 px-4 overflow-hidden">
+        {/* Animated Background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-emerald-50 via-white to-teal-50"></div>
+        <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-200 rounded-full blur-3xl opacity-30 animate-pulse-slow"></div>
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-teal-200 rounded-full blur-3xl opacity-30 animate-pulse-slow" style={{ animationDelay: '2s' }}></div>
+        
+        {/* Decorative floating elements */}
+        <div className="absolute top-20 left-10 text-4xl opacity-10 animate-float">⚕️</div>
+        <div className="absolute bottom-20 right-10 text-4xl opacity-10 animate-float-delayed">🌿</div>
+        <div className="absolute top-1/3 right-1/4 text-3xl opacity-5 animate-spin-slow">🍃</div>
+        
+        <div className="relative z-10 max-w-6xl mx-auto">
+          {/* Section Header */}
+          <div className="text-center mb-12 md:mb-16">
+            <div className="inline-flex items-center gap-2 bg-emerald-100/80 backdrop-blur-sm px-4 py-2 rounded-full border border-emerald-200 mb-4 animate-fade-in-up">
+              <span className="text-emerald-600 text-sm">⚕️</span>
+              <span className="text-emerald-700 text-xs font-semibold tracking-wider">EST. 2011</span>
+              <span className="text-emerald-600 text-sm">🌿</span>
             </div>
-            <div>
-              <h3 className="font-bold text-gray-800 text-lg">Shetty Sangappa Memorial Trust</h3>
-              <p className="text-emerald-600 text-sm font-medium">Empowering since 2011</p>
+            
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-700 to-teal-600">
+                About the Trust
+              </span>
+            </h2>
+            
+            <div className="w-24 h-1 bg-gradient-to-r from-emerald-400 to-teal-500 mx-auto rounded-full mb-4"></div>
+            
+            <p className="text-gray-600 text-sm sm:text-base md:text-lg max-w-2xl mx-auto">
+              Empowering young minds through quality education and holistic development
+            </p>
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-8 md:gap-10">
+            {/* Left Column */}
+            <div className="space-y-6">
+              {/* Trust Card */}
+              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-emerald-100 hover:shadow-xl transition-all duration-300 group hover:-translate-y-1">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-14 h-14 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                    <span className="text-2xl">🏛️</span>
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-gray-800 text-lg">Shetty Sangappa Memorial Trust</h3>
+                    <p className="text-emerald-600 text-sm font-medium">Empowering since 2011</p>
+                  </div>
+                </div>
+                <p className="text-gray-700 leading-relaxed">
+                  Shetty Group of Institutions is a part of Shetty Sangappa Memorial Trust established in 2011 to empower young budding brains with technical and entrepreneurial knowledge and skills, assisting them in holistic growth.
+                </p>
+              </div>
+
+              {/* Location Card */}
+              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-md border border-emerald-100 hover:shadow-xl transition-all duration-300 group hover:-translate-y-1">
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                    <span className="text-2xl">📍</span>
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-gray-800 mb-2">Prime Location</h3>
+                    <p className="text-gray-600 leading-relaxed">
+                      Located just on the other side of the Highway (NH 150) on Shahbad road, Kalaburagi, the college nestles amidst sprawling 17 acres of greenery with a hilly backdrop.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Achievement Card */}
+              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-5 border border-emerald-100">
+                <div className="flex items-center gap-3 mb-2">
+                  <span className="text-2xl">🏆</span>
+                  <span className="text-emerald-700 font-semibold">Recognized Excellence</span>
+                </div>
+                <p className="text-gray-600 text-sm">
+                  Approved by NCH, Ministry of Ayush, Govt. of India | Affiliated to RGUHS, Bengaluru
+                </p>
+              </div>
+            </div>
+
+            {/* Right Column */}
+            <div className="space-y-6">
+              {/* Campus Card */}
+              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-emerald-100 hover:shadow-xl transition-all duration-300 group hover:-translate-y-1">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-14 h-14 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                    <span className="text-2xl">🌿</span>
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-gray-800 text-lg">Green Campus</h3>
+                    <p className="text-emerald-600 text-sm font-medium">Eco-friendly Environment</p>
+                  </div>
+                </div>
+                <p className="text-gray-700 leading-relaxed">
+                  The campus breathes fresh air of nature with vast greenery, free from pollution. The ambience is ideal for learning, research, living and exploration.
+                </p>
+              </div>
+
+              {/* Mission Card */}
+              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-md border border-emerald-100 hover:shadow-xl transition-all duration-300 group hover:-translate-y-1">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-14 h-14 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                    <span className="text-2xl">✨</span>
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-gray-800 text-lg">Our Mission</h3>
+                    <p className="text-emerald-600 text-sm font-medium">Excellence in Education</p>
+                  </div>
+                </div>
+                <p className="text-gray-700 leading-relaxed font-medium">
+                  "This education major has set a hallmark standard in professional education - redefining its own standards consistently."
+                </p>
+              </div>
             </div>
           </div>
-          <p className="text-gray-700 leading-relaxed">
-            Shetty Group of Institutions is a part of Shetty Sangappa Memorial Trust established in 2011 to empower young budding brains with technical and entrepreneurial knowledge and skills, assisting them in holistic growth.
-          </p>
         </div>
-
-        {/* Location Card */}
-        <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-md border border-emerald-100 hover:shadow-xl transition-all duration-300 group hover:-translate-y-1">
-          <div className="flex items-start gap-4">
-            <div className="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-              <span className="text-2xl">📍</span>
-            </div>
-            <div>
-              <h3 className="font-semibold text-gray-800 mb-2">Prime Location</h3>
-              <p className="text-gray-600 leading-relaxed">
-                Located just on the other side of the Highway (NH 150) on Shahbad road, Kalaburagi, the college nestles amidst sprawling 17 acres of greenery with a hilly backdrop.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* Achievement Card */}
-        <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-5 border border-emerald-100">
-          <div className="flex items-center gap-3 mb-2">
-            <span className="text-2xl">🏆</span>
-            <span className="text-emerald-700 font-semibold">Recognized Excellence</span>
-          </div>
-          <p className="text-gray-600 text-sm">
-            Approved by NCH, Ministry of Ayush, Govt. of India | Affiliated to RGUHS, Bengaluru
-          </p>
-        </div>
-      </div>
-
-      {/* Right Column */}
-      <div className="space-y-6">
-        {/* Campus Card */}
-        <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-emerald-100 hover:shadow-xl transition-all duration-300 group hover:-translate-y-1">
-          <div className="flex items-center gap-4 mb-4">
-            <div className="w-14 h-14 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
-              <span className="text-2xl">🌿</span>
-            </div>
-            <div>
-              <h3 className="font-bold text-gray-800 text-lg">Green Campus</h3>
-              <p className="text-emerald-600 text-sm font-medium">Eco-friendly Environment</p>
-            </div>
-          </div>
-          <p className="text-gray-700 leading-relaxed">
-            The campus breathes fresh air of nature with vast greenery, free from pollution. The ambience is ideal for learning, research, living and exploration.
-          </p>
-        </div>
-
-        {/* Mission Card - Now matching other cards */}
-        <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-md border border-emerald-100 hover:shadow-xl transition-all duration-300 group hover:-translate-y-1">
-          <div className="flex items-center gap-4 mb-4">
-            <div className="w-14 h-14 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
-              <span className="text-2xl">✨</span>
-            </div>
-            <div>
-              <h3 className="font-bold text-gray-800 text-lg">Our Mission</h3>
-              <p className="text-emerald-600 text-sm font-medium">Excellence in Education</p>
-            </div>
-          </div>
-          <p className="text-gray-700 leading-relaxed font-medium">
-            "This education major has set a hallmark standard in professional education - redefining its own standards consistently."
-          </p>
-        </div>
-      </div>
-    </div>
-
-    {/* Decorative bottom wave */}
-    <div className="absolute bottom-0 left-0 right-0 h-20 pointer-events-none">
-      <svg className="w-full h-full text-white/5" viewBox="0 0 1200 120" preserveAspectRatio="none">
-        <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="currentColor"></path>
-      </svg>
-    </div>
-  </div>
-</section>
+      </section>
 
       {/* Photo Gallery */}
       <section className="py-12 sm:py-16 md:py-24 px-4 bg-white">
@@ -386,59 +354,27 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Testimonials – circular with actual student photos (.png) */}
+      {/* Testimonials Section with AnimatedList */}
       <section className="relative py-12 sm:py-16 md:py-24 px-4 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-emerald-50 via-white to-teal-50"></div>
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-emerald-100 rounded-full blur-3xl opacity-30"></div>
-        <div className="relative z-10 max-w-6xl mx-auto">
+        <div className="relative z-10 max-w-4xl mx-auto">
           <div className="text-center mb-8 md:mb-12">
             <div className="w-16 sm:w-20 h-0.5 bg-gradient-to-r from-emerald-400 to-teal-500 mx-auto mb-5 rounded-full"></div>
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-emerald-800 mb-3">⚕️ Student Testimonials 🌿</h2>
             <p className="text-gray-600 text-sm sm:text-base md:text-lg">Real experiences from our BHMS students</p>
+            <p className="text-emerald-600 text-xs mt-2">✨ Scroll through testimonials | Full text visible | Use arrow keys to navigate ✨</p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 md:gap-10">
-            {testimonials.map((testimonial, idx) => (
-              <div key={idx} className="group bg-white/90 backdrop-blur-sm rounded-2xl sm:rounded-[2rem] md:rounded-[3rem] p-5 sm:p-6 md:p-8 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-emerald-100 relative overflow-hidden">
-                <div className="absolute -top-8 -right-8 w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-full bg-gradient-to-br from-emerald-100 to-teal-100 opacity-30 group-hover:scale-110 transition-transform duration-500"></div>
-                <div className="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-5">
-                  <div className="relative w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full overflow-hidden ring-3 sm:ring-4 ring-white shadow-lg flex-shrink-0">
-                    <Image
-                      src={testimonial.image}
-                      alt={testimonial.name}
-                      width={64}
-                      height={64}
-                      className="w-full h-full object-cover"
-                      onError={(e) => {
-                        const parent = (e.target as HTMLElement).parentElement;
-                        if (parent) {
-                          parent.innerHTML = testimonial.emoji;
-                          parent.classList.add('flex', 'items-center', 'justify-center', 'text-xl', 'sm:text-2xl', 'bg-gradient-to-br', 'from-emerald-500', 'to-teal-600', 'text-white');
-                        }
-                      }}
-                    />
-                  </div>
-                  <div>
-                    <p className="font-bold text-gray-800 text-sm sm:text-base md:text-lg">{testimonial.name}</p>
-                    <div className="flex gap-0.5 sm:gap-1 mt-1">
-                      {[...Array(testimonial.rating)].map((_, i) => (
-                        <span key={i} className="text-emerald-500 text-xs sm:text-sm">★</span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-                <p className="text-gray-700 leading-relaxed text-xs sm:text-sm md:text-base italic mb-3 sm:mb-4">
-                  &ldquo;{testimonial.text}&rdquo;
-                </p>
-                <div className="flex items-center justify-between mt-2 sm:mt-3 pt-2 sm:pt-3 border-t border-emerald-100">
-                  <span className="text-[10px] sm:text-xs text-gray-500">{testimonial.year}</span>
-                  <div className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600">
-                    <svg className="w-3 h-3 sm:w-3.5 sm:h-3.5 md:w-4 md:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4" />
-                    </svg>
-                  </div>
-                </div>
-              </div>
-            ))}
+          
+          <div className="flex justify-center">
+            <AnimatedList
+              showGradients={true}
+              enableArrowNavigation={true}
+              displayScrollbar={true}
+              className="w-full max-w-3xl"
+              itemClassName="hover:shadow-xl transition-all duration-300"
+              onItemSelect={(item, index) => console.log("Selected:", item?.name, index)}
+            />
           </div>
         </div>
       </section>
@@ -504,13 +440,34 @@ export default function Home() {
           from { transform: rotate(360deg); }
           to { transform: rotate(0deg); }
         }
+        @keyframes pulse {
+          0%, 100% { opacity: 0.1; }
+          50% { opacity: 0.2; }
+        }
+        @keyframes bounce {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-10px); }
+        }
+        @keyframes float {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-15px); }
+        }
+        @keyframes float-delayed {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-15px); }
+        }
+        @keyframes pulse-slow {
+          0%, 100% { opacity: 0.3; transform: scale(1); }
+          50% { opacity: 0.5; transform: scale(1.05); }
+        }
         .animate-fade-in-up { animation: fade-in-up 0.6s ease-out forwards; }
         .animate-spin-slow { animation: spin-slow 40s linear infinite; }
         .animate-spin-slower { animation: spin-slower 60s linear infinite; }
-        @keyframes pulse { 0%,100% { opacity:0.1; } 50% { opacity:0.2; } }
         .animate-pulse { animation: pulse 3s ease-in-out infinite; }
-        @keyframes bounce { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-10px); } }
         .animate-bounce { animation: bounce 4s ease-in-out infinite; }
+        .animate-float { animation: float 4s ease-in-out infinite; }
+        .animate-float-delayed { animation: float-delayed 5s ease-in-out infinite; }
+        .animate-pulse-slow { animation: pulse-slow 6s ease-in-out infinite; }
       `}</style>
     </main>
   );
